@@ -91,7 +91,12 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full max-w-[1296px] h-screen px-10 py-7 flex justify-center items-center ;
+  @apply w-full  h-screen px-10 py-7 flex flex-col justify-center items-center ;
+}
+
+.nav {
+  @apply text-heading-5 nline-block text-center;
+  
 }
 
 .lang-btn{
