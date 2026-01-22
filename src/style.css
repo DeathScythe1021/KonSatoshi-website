@@ -96,7 +96,10 @@
 
 .nav {
   @apply inline-block text-center;
-  
+}
+
+.nav:hover{
+  @apply text-default;
 }
 
 
