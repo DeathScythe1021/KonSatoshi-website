@@ -23,7 +23,7 @@
   
 
   --font-dela: "Dela Gothic One", sans-serif;
-  --font-mincho: "Shippori Mincho", serif;
+  --font-mincho: "Shippori Mincho", serif ;
 
 }
 
@@ -91,8 +91,10 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full  h-screen px-10 py-7 flex flex-col justify-center items-center ;
+  @apply w-full h-screen px-10 py-7 flex flex-col justify-center items-center;
 }
+
+/* 首頁 */
 
 .nav {
   @apply inline-block text-center;
@@ -112,6 +114,15 @@
 .lang-btn.active{
   @apply  text-bg bg-default ;
 
+}
+/* 介紹頁 */
+
+.introduce{
+  @apply p-1 w-fit bg-bg text-neutral-900;
+}
+
+.title{
+  @apply font-dela text-[400px] font-normal text-default;
 }
 }
 
