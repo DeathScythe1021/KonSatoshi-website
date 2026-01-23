@@ -91,7 +91,7 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full h-screen px-10 py-7 flex flex-col justify-center items-center;
+  @apply w-full h-screen px-10 py-7 flex flex-col justify-center items-center snap-start;
 }
 
 /* 首頁 */
