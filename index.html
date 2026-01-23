@@ -7,7 +7,7 @@
     <link href="/src/style.css" rel="stylesheet" />
   </head>
   <body>
-    <main class="w-full h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    <main class="scroll-container w-full h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <!-- homepage -->
       <section class="section snap-start ">
         <div class="max-w-[1296px] w-full h-screen flex flex-col gap-10 justify-center items-center">
@@ -86,13 +86,16 @@
         class="story-section section snap-start relative w-full bg-neutral-900 "
       >
         <div class="absolute flex gap-10 z-10">
-          <h1 class="title">今</h1>
-          <h1 class="title">敏</h1>
+          <h1 class="title title-text">今</h1>
+          <h1 class="title title-text">敏</h1>
         </div>
-        <div class="absolute w-full overflow-hidden z-0">
-          <!-- <div class="title  whitespace-nowrap tracking-[40px]">
+        <div class="absolute w-full overflow-hidden z-0 flex justify-end">
+          <div class="title title-marquee whitespace-nowrap tracking-[40px] opacity-0">
             今敏今敏今敏今敏今敏今敏今敏
-          </div> -->
+          </div>
+          <div class="title title-marquee whitespace-nowrap tracking-[40px] opacity-0">
+            今敏今敏今敏今敏今敏今敏今敏
+          </div>
         </div>
 
         <div class="relative w-[800px] mx-auto mt-20 z-30">
@@ -101,7 +104,7 @@
     <img
       src="./src/assets/images/KonSatoshi.jpg"
       alt=""
-      class="w-full block"
+      class="kon-img w-full block "
     />
   </div>
 
@@ -128,6 +131,6 @@
       </section>
     </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
