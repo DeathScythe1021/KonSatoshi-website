@@ -20,7 +20,7 @@ const tl1 = gsap.timeline({
     start: "top center",
    toggleActions: "play none none reverse",
   },
-  delay: 0.5
+  delay: 0.8
 });
 
 tl1
@@ -60,9 +60,10 @@ tl1
   }, "<")
   .from(".introduce",{
     xPercent:400,
-    stagger: 0.2,
+    stagger: 0.6,
     duration:1,
-    ease: "power2.out"
+    ease: "power3.out",
+    delay:0.8
 
 
   },"<");
