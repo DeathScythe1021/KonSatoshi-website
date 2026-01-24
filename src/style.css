@@ -91,7 +91,7 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full h-screen px-10 py-7 flex flex-col justify-center items-center snap-start;
+  @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start;
 }
 
 /* 首頁 */
@@ -124,6 +124,10 @@
 .title{
   @apply font-dela text-[400px] font-normal text-default;
 }
+}
+
+.high-light{
+  @apply bg-default text-neutral-900;
 }
 
 

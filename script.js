@@ -2,6 +2,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+
+
 // homepage-lang-btn
 const langButton = document.querySelectorAll(".lang-btn");
 
@@ -67,3 +69,6 @@ tl1
 
 
   },"<");
+
+
+  
