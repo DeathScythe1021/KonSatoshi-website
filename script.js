@@ -71,4 +71,37 @@ tl1
   },"<");
 
 
+  // story-page下半部
+  const tl2 = gsap.timeline({
+    scrollTrigger:{
+      trigger:".story-bottom-section",
+      scroll:".scroll-containe",
+      start:"top center"
+    },
+    toggleActions: "play none none reverse"
+  });
+// 時間軸
+  tl2
+  .to(".story-text",{
+    opacity:1,
+    stagger:0.5,
+    duration:0.5,
+    ease:"power3.out"
+  });
+
+  // high-light單獨拉出來做
+  const highLight = document.querySelectorAll(".high-light");
+  highLight.forEach((element)=>{
+    gsap.to(element,{
+      backgroundSize: "100% 100%",
+      duration: 0.6,               // 動畫速度
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: element,
+        start: "top 75%",          // 觸發位置
+        toggleActions: "play none none reverse",
+        markers: true
+      }
+    });
+  });
   

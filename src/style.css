@@ -126,10 +126,18 @@
 }
 }
 
-.high-light{
-  @apply bg-default text-neutral-900;
-}
 
+.high-light {
+  /* 1. @apply 專區：只放 Tailwind 的 class */
+  @apply text-neutral-900 box-decoration-clone px-1 inline-block;
+
+  /* 2. 原生 CSS 專區：放 background-size 等設定 */
+  /* 注意：螢光筆效果必須是用 background-image (linear-gradient)，不能只用 bg-color */
+  background-image: linear-gradient(to right, #D73B35 0%, #D73B35 100%); 
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+}
 
 @layer base {
   body {
