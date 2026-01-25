@@ -147,7 +147,7 @@
 
   html {
     
-    @apply snap-y snap-mandatory scroll-auto h-screen overflow-y-scroll;
+    @apply snap-y snap-proximity scroll-auto h-screen overflow-y-scroll;
   }
 
   body {
