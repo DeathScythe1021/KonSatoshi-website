@@ -91,7 +91,7 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start;
+  @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start snap-always; 
 }
 
 /* 首頁 */
@@ -140,6 +140,12 @@
 }
 
 @layer base {
+
+  html {
+    
+    @apply snap-y snap-mandatory scroll-auto h-screen overflow-y-scroll;
+  }
+
   body {
     @apply bg-bg text-neutral-900;
     @apply font-mincho font-normal text-[20px] leading-normal tracking-[0.05em];
