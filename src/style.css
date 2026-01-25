@@ -124,12 +124,16 @@
 .title{
   @apply font-dela text-[400px] font-normal text-default;
 }
+
+.story-text{
+  @apply  text-default whitespace-normal ;
+}
 }
 
 
 .high-light {
   /* 1. @apply 專區：只放 Tailwind 的 class */
-  @apply text-neutral-900 box-decoration-clone px-1 inline-block;
+  @apply text-neutral-900 font-mincho font-bold text-[28px] leading-normal tracking-[0.05em] box-decoration-clone px-1 inline-block;
 
   /* 2. 原生 CSS 專區：放 background-size 等設定 */
   /* 注意：螢光筆效果必須是用 background-image (linear-gradient)，不能只用 bg-color */
