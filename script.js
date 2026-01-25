@@ -19,9 +19,9 @@ const tl1 = gsap.timeline({
   scrollTrigger: {
     trigger: ".story-section",
     start: "top top",
-    end: "+=1500",
+    end: "+=2000",
    toggleActions: "play none none none",
-   scrub:3,
+   scrub:1,
    pin:true
   },
   delay: 0.8
@@ -42,7 +42,7 @@ const introduce = gsap.from(".introduce",{
     stagger: 0.15,
     duration:0.5,
     ease: "power3.out",
-    delay:0.2,
+    delay:0.5,
     paused:true
   });
 
@@ -53,7 +53,8 @@ tl1
       return index === 0 ? -200 : 200;
     },
     opacity: 1,
-    duration: 0.5,
+    duration: 0.8,
+    delay:0.2,
     ease: "power2.out",
   })
 
@@ -63,7 +64,7 @@ tl1
     {
       scale: 0.1,
       opacity: 0,
-      duration: 0.2,
+      duration: 0.5,
       ease: "power3.out",
     },
     "-=0.5"
@@ -73,19 +74,25 @@ tl1
   .to(".title-marquee", {
     opacity: 1,
     duration: 0.1,
-    delay:0.3,
+    delay:0.1,
     
     onStart: () => {
       marquee.play(); 
     },
-  }, "-=0.5")
+  }, "+=0.1")
 
   // 介紹文字開跑
   .from(".introduce-text",{
     onStart:()=>{
       introduce.play();
     },
-  },"<");
+    onReverseComplete: () => {
+      introduce.reverse();
+    }
+  },"+=0.1")
+  // 留白（不會馬上滑到下一頁）
+  .to({}, { duration: 1 });
+  ;
 
 
   // story-page下半部
