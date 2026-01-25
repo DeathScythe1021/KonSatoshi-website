@@ -18,11 +18,33 @@ langButton.forEach((btn) => {
 const tl1 = gsap.timeline({
   scrollTrigger: {
     trigger: ".story-section",
-    start: "top center",
-   toggleActions: "play none none reverse",
+    start: "top top",
+    end: "+=1500",
+   toggleActions: "play none none none",
+   scrub:3,
+   pin:true
   },
   delay: 0.8
 });
+
+// 跑馬燈
+const marquee = gsap.to(".title-marquee", {
+  xPercent: 100,   
+  duration: 20,     
+  repeat: -1,      
+  ease: "none",   
+  paused: true     
+});
+
+// 文字介紹效果
+const introduce = gsap.from(".introduce",{
+    xPercent:400,
+    stagger: 0.15,
+    duration:0.5,
+    ease: "power3.out",
+    delay:0.2,
+    paused:true
+  });
 
 tl1
 // 標題左右分開
@@ -31,7 +53,7 @@ tl1
       return index === 0 ? -200 : 200;
     },
     opacity: 1,
-    duration: 0.8,
+    duration: 0.5,
     ease: "power2.out",
   })
 
@@ -41,32 +63,28 @@ tl1
     {
       scale: 0.1,
       opacity: 0,
-      duration: 1.3,
+      duration: 0.2,
       ease: "power3.out",
     },
     "-=0.5"
   )
-  
-//   跑馬燈浮現
-  .to(".title-marquee", {
-    opacity: 1,
-    duration: 1, 
-  }, "-=0.5") 
+
   // 跑馬燈開跑
   .to(".title-marquee", {
-    xPercent: 100,   
-    duration: 20,   
-    repeat: -1,     
-    ease: "none",   
-  }, "<")
-  .from(".introduce",{
-    xPercent:400,
-    stagger: 0.6,
-    duration:1,
-    ease: "power3.out",
-    delay:0.8
+    opacity: 1,
+    duration: 0.1,
+    delay:0.3,
+    
+    onStart: () => {
+      marquee.play(); 
+    },
+  }, "-=0.5")
 
-
+  // 介紹文字開跑
+  .from(".introduce-text",{
+    onStart:()=>{
+      introduce.play();
+    },
   },"<");
 
 
@@ -74,16 +92,20 @@ tl1
   const tl2 = gsap.timeline({
     scrollTrigger:{
       trigger:".story-bottom-section",
-      start:"top center"
+      start:"top 50%",
+      toggleActions: "play none none reverse",
+      scrub:1
     },
-    toggleActions: "play none none none"
+    
   });
 // 時間軸
   tl2
-  .to(".story-text",{
-    opacity:1,
-    stagger:0.5,
-    duration:0.5,
+  .from(".story-text",{
+  
+    stagger:1,
+    duration:1,
+    y: 150,
+    
     ease:"power3.out"
   });
 
