@@ -21,7 +21,7 @@ const tl1 = gsap.timeline({
     start: "top top",
     end: "+=2000",
    toggleActions: "play none none none",
-   scrub:1,
+   scrub:2,
    pin:true
   },
   delay: 0.8
@@ -74,12 +74,11 @@ tl1
   .to(".title-marquee", {
     opacity: 1,
     duration: 0.1,
-    delay:0.1,
     
     onStart: () => {
       marquee.play(); 
     },
-  }, "+=0.1")
+  }, "<")
 
   // 介紹文字開跑
   .from(".introduce-text",{
@@ -121,14 +120,17 @@ tl1
   highLight.forEach((element)=>{
     gsap.to(element,{
       backgroundSize: "100% 100%",
-      duration: 0.6,               
+      duration: 0.3,
+      delay:0.1,               
       ease: "power2.out",
       scrollTrigger: {
         trigger: element,
-        start: "bottom 70%",          
-        toggleActions: "play none none none",
+        start: "top 95%",          
+        toggleActions: "play none none reverse",
         markers: true
       }
     });
   });
+
+ 
 
