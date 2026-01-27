@@ -23,7 +23,7 @@
   
 
   --font-dela: "Dela Gothic One", sans-serif;
-  --font-mincho: "Shippori Mincho", serif;
+  --font-mincho: "Shippori Mincho", serif ;
 
 }
 
@@ -91,8 +91,10 @@
   /* 元件樣式 */
 
 .section{
-  @apply w-full  h-screen px-10 py-7 flex flex-col justify-center items-center ;
+  @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start snap-always; 
 }
+
+/* 首頁 */
 
 .nav {
   @apply inline-block text-center;
@@ -113,10 +115,41 @@
   @apply  text-bg bg-default ;
 
 }
+/* 介紹頁 */
+
+.introduce{
+  @apply p-1 w-fit bg-bg text-neutral-900;
+}
+
+.title{
+  @apply font-dela text-[400px] font-normal text-default;
+}
+
+.story-text{
+  @apply  text-default whitespace-normal ;
+}
 }
 
 
+.high-light {
+  /* 1. @apply 專區：只放 Tailwind 的 class */
+  @apply text-neutral-900 font-mincho font-bold text-[28px] leading-normal tracking-[0.05em] box-decoration-clone px-1 inline-block;
+
+  /* 2. 原生 CSS 專區：放 background-size 等設定 */
+  /* 注意：螢光筆效果必須是用 background-image (linear-gradient)，不能只用 bg-color */
+  background-image: linear-gradient(to right, #D73B35 0%, #D73B35 100%); 
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+}
+
 @layer base {
+
+  html {
+    
+    @apply snap-y snap-proximity scroll-auto h-screen overflow-y-scroll;
+  }
+
   body {
     @apply bg-bg text-neutral-900;
     @apply font-mincho font-normal text-[20px] leading-normal tracking-[0.05em];
