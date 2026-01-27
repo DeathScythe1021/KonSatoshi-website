@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-// homepage-lang-btn
+//#region homepage-lang-btn
 const langButton = document.querySelectorAll(".lang-btn");
 
 langButton.forEach((btn) => {
@@ -11,8 +11,9 @@ langButton.forEach((btn) => {
     this.classList.add("active");
   });
 });
+// #endregion
 
-// storypage
+// #region story-page-section
 const tl1 = gsap.timeline({
   scrollTrigger: {
     trigger: ".story-section",
@@ -97,11 +98,13 @@ tl1
   )
   // 留白（不會馬上滑到下一頁）
   .to({}, { duration: 1 });
-// story-page下半部
+// #endregion
+
+// #region story-bottom-section
 
 // 針對每一個 story-bottom-section 獨立製作動畫
 gsap.utils.toArray(".story-bottom-section").forEach((section) => {
-  // 1. 限制範圍：只抓「這個 Section」裡面的東西
+  // 限制範圍：只抓「這個 Section」裡面的東西
   const text = section.querySelector(".story-text");
   const topImgs = section.querySelectorAll(".float-top");
   const bottomImgs = section.querySelectorAll(".float-bottom");
@@ -111,7 +114,7 @@ gsap.utils.toArray(".story-bottom-section").forEach((section) => {
       trigger: section,
       start: "top 90%",
       end: "bottom 20%",
-      
+
       markers: true,
     },
   });
@@ -133,9 +136,8 @@ gsap.utils.toArray(".story-bottom-section").forEach((section) => {
     paused: true,
     ease: "power1.inOut",
   });
-
+  // 文字+圖片動畫時間軸
   tl2
-
     .from(text, {
       y: 200,
       opacity: 0,
@@ -180,7 +182,7 @@ gsap.utils.toArray(".story-bottom-section").forEach((section) => {
       "<",
     );
 });
-
+// 文字+圖片動畫時間軸
 const highLight = document.querySelectorAll(".high-light");
 highLight.forEach((element) => {
   gsap.to(element, {
@@ -196,3 +198,87 @@ highLight.forEach((element) => {
     },
   });
 });
+// #endregion
+
+// #region cursor-dot
+const dot = document.querySelector(".cursor-dot");
+const path = document.querySelector(".trail-path");
+const svgContainer = document.querySelector(".cursor-trail");
+const activeZones = document.querySelectorAll(".story-bottom-section");
+
+// 設定尾巴長度與陣列
+const segments = 15;
+const points = [];
+const mouse = { x: 0, y: 0 };
+
+// 初始化所有點至 (0,0)
+for (let i = 0; i < segments; i++) {
+  points.push({ x: 0, y: 0 });
+}
+
+// 設定 GSAP quickTo (紅點跟隨優化)
+const xTo = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
+const yTo = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
+
+// 滑鼠位置紀錄
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  // 紅點隨時跟隨 (即使隱藏中也在跟，避免顯示瞬間位置錯誤)
+  xTo(mouse.x);
+  yTo(mouse.y);
+});
+
+// B. 動畫繪製迴圈 (60FPS)
+gsap.ticker.add(() => {
+  // 1. 物理運算 (Lerp 插值)
+  // 第一點跟滑鼠
+  points[0].x += (mouse.x - points[0].x) * 0.8;
+  points[0].y += (mouse.y - points[0].y) * 0.8;
+
+  // 後續點跟前一點
+  for (let i = 1; i < segments; i++) {
+    const prev = points[i - 1];
+    const curr = points[i];
+    curr.x += (prev.x - curr.x) * 0.35;
+    curr.y += (prev.y - curr.y) * 0.35;
+  }
+
+  // 2. 繪製 SVG 路徑
+  let pathString = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 1; i < segments; i++) {
+    pathString += ` L ${points[i].x} ${points[i].y}`;
+  }
+  path.setAttribute("d", pathString);
+});
+
+// C.區域進出判斷
+
+activeZones.forEach((zone) => {
+  // --- 進場：淡入 (Opacity 0 -> 1) ---
+  zone.addEventListener("mouseenter", (e) => {
+    // 1. 直接用 GSAP 控制透明度 (0.3秒淡入)
+    // 陣列寫法 [dot, svgContainer] 可以同時控制紅點跟線條
+    gsap.to([dot, svgContainer], { opacity: 1, duration: 0.3 });
+
+    // 2. 【重要】瞬移重置 (邏輯不變)
+    const startX = e.clientX;
+    const startY = e.clientY;
+
+    xTo(startX);
+    yTo(startY);
+
+    points.forEach((p) => {
+      p.x = startX;
+      p.y = startY;
+    });
+  });
+
+  // --- 離場：淡出 (Opacity 1 -> 0) ---
+  zone.addEventListener("mouseleave", () => {
+    // 直接用 GSAP 控制透明度 (0.3秒淡出)
+    gsap.to([dot, svgContainer], { opacity: 0, duration: 0.3 });
+  });
+});
+
+// #endregion
