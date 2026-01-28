@@ -1,34 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Shippori+Mincho&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Shippori+Mincho&display=swap");
 @import "tailwindcss";
 
-
 /* 定義變數 */
-@theme{
-  --color-light:#F7515C;
-  --color-default:#D73B35;
-  --color-dark:#D02034;
+@theme {
+  --color-light: #f7515c;
+  --color-default: #d73b35;
+  --color-dark: #d02034;
 
-  --color-bg:#E9F5F5;
+  --color-bg: #e9f5f5;
 
-  --color-neutral-50:#FFFFFF;
-  --color-neutral-100:#D9D9D9;
-  --color-neutral-200:#E9ECEF;
-  --color-neutral-300:#DEE2E6;
-  --color-neutral-400:#CED4DA;
-  --color-neutral-500:#ADB5BD;
-  --color-neutral-600:#6C757D;
-  --color-neutral-700:#495057;
-  --color-neutral-800:#343A40;
-  --color-neutral-900:#212529;
-  
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #d9d9d9;
+  --color-neutral-200: #e9ecef;
+  --color-neutral-300: #dee2e6;
+  --color-neutral-400: #ced4da;
+  --color-neutral-500: #adb5bd;
+  --color-neutral-600: #6c757d;
+  --color-neutral-700: #495057;
+  --color-neutral-800: #343a40;
+  --color-neutral-900: #212529;
 
   --font-dela: "Dela Gothic One", sans-serif;
-  --font-mincho: "Shippori Mincho", serif ;
-
+  --font-mincho: "Shippori Mincho", serif;
 }
 
 @layer components {
-  
   .text-display-1 {
     @apply font-dela font-normal text-[152px] leading-[1.2] tracking-[0.05em];
   }
@@ -87,49 +83,69 @@
     @apply font-mincho font-normal text-[14px] leading-normal tracking-[0.05em];
   }
 
-
   /* 元件樣式 */
 
-.section{
-  @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start snap-always; 
+  /* 滑鼠紅點點 */
+  .cursor-dot {
+    @apply fixed top-0 left-0 z-[9999] pointer-events-none;
+    @apply w-[10px] h-[10px] bg-default rounded-full opacity-0 ;
+
+    /* 改用這行來居中 (寬高的一半) */
+    @apply -ml-[5px] -mt-[5px];
+  }
+
+  /* 滑鼠追蹤線條容器 */
+  .cursor-trail {
+    @apply fixed top-0 left-0 z-[9998] pointer-events-none w-screen h-screen opacity-0;
+  }
+  /* 滑鼠追蹤線條本體 */
+  .trail-path {
+    @apply fill-none stroke-default stroke-2 opacity-60;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .section {
+    @apply w-full px-10 py-7 flex flex-col justify-center items-center snap-start snap-always;
+  }
+
+  /* 首頁 */
+
+  .nav {
+    @apply inline-block text-center;
+  }
+
+  .nav:hover {
+    @apply text-default;
+  }
+
+  .lang-btn {
+    @apply font-dela w-11 h-11 p-1.5  text-default bg-bg border-[0.5px] border-black;
+  }
+
+  .lang-btn.active {
+    @apply text-bg bg-default;
+  }
+  /* 介紹頁 */
+
+  .introduce {
+    @apply p-1 w-fit bg-bg text-neutral-900;
+  }
+
+  .title {
+    @apply font-dela text-[400px] font-normal text-default;
+  }
+
+  .story-text {
+    @apply text-default whitespace-normal;
+  }
 }
 
-/* 首頁 */
+/* story-bottom-section */
 
-.nav {
-  @apply inline-block text-center;
+.story-bottom-section{
+  @apply cursor-none;
 }
-
-.nav:hover{
-  @apply text-default;
-}
-
-
-
-.lang-btn{
-  @apply font-dela w-11 h-11 p-1.5  text-default bg-bg border-[0.5px] border-black;
-
-}
-
-.lang-btn.active{
-  @apply  text-bg bg-default ;
-
-}
-/* 介紹頁 */
-
-.introduce{
-  @apply p-1 w-fit bg-bg text-neutral-900;
-}
-
-.title{
-  @apply font-dela text-[400px] font-normal text-default;
-}
-
-.story-text{
-  @apply  text-default whitespace-normal ;
-}
-}
-
 
 .high-light {
   /* 1. @apply 專區：只放 Tailwind 的 class */
@@ -137,16 +153,14 @@
 
   /* 2. 原生 CSS 專區：放 background-size 等設定 */
   /* 注意：螢光筆效果必須是用 background-image (linear-gradient)，不能只用 bg-color */
-  background-image: linear-gradient(to right, #D73B35 0%, #D73B35 100%); 
+  background-image: linear-gradient(to right, #d73b35 0%, #d73b35 100%);
   background-size: 0% 100%;
   background-repeat: no-repeat;
   background-position: 0 90%;
 }
 
 @layer base {
-
   html {
-    
     @apply snap-y snap-proximity scroll-auto h-screen overflow-y-scroll;
   }
 
@@ -178,5 +192,4 @@
   h6 {
     @apply font-mincho font-bold text-[14px] leading-normal tracking-[0.05em];
   }
-
 }
