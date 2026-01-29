@@ -159,6 +159,10 @@
   background-position: 0 90%;
 }
 
+.story-text .char {
+  @apply pointer-events-auto; 
+}
+
 @layer base {
   html {
     @apply snap-y snap-proximity scroll-auto h-screen overflow-y-scroll;

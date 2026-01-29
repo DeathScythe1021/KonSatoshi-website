@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from 'split-type';
 gsap.registerPlugin(ScrollTrigger);
 
 //#region homepage-lang-btn
@@ -198,13 +199,39 @@ highLight.forEach((element) => {
     },
   });
 });
+
+// 文字變色特效
+const text = new SplitType('.story-text', { types: 'chars' });
+
+text.chars.forEach((char) => {
+  
+  // 當滑鼠「碰到」單個字元時
+  char.addEventListener('mouseenter', () => {
+    gsap.to(char, {
+      color: "#e9f5f5",
+      duration: 0.2,
+      overwrite: true
+    });
+  });
+
+  char.addEventListener('mouseleave', () => {
+  // 直接根據是否有 .high-light 類別來決定回歸哪種 CSS 變數
+  const isHighLight = char.closest('.high-light');
+  
+  gsap.to(char, {
+    color: isHighLight ? "#212529" : "#d73b35",
+    duration: 0.5,
+    overwrite: true
+  });
+});
+});
 // #endregion
 
 // #region cursor-dot
 const dot = document.querySelector(".cursor-dot");
 const path = document.querySelector(".trail-path");
 const svgContainer = document.querySelector(".cursor-trail");
-const activeZones = document.querySelectorAll(".story-bottom-section");
+const activeZones = document.querySelectorAll(".story-bottom-section, .story-text");
 
 // 設定尾巴長度與陣列
 const segments = 15;
@@ -230,6 +257,7 @@ window.addEventListener("mousemove", (e) => {
 });
 
 // B. 動畫繪製迴圈 (60FPS)
+
 gsap.ticker.add(() => {
   // 1. 物理運算 (Lerp 插值)
   // 第一點跟滑鼠
