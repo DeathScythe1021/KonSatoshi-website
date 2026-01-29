@@ -122,16 +122,16 @@ gsap.utils.toArray(".story-bottom-section").forEach((section) => {
 
   // 浮動效果
   const wave1 = gsap.to(topImgs, {
-    yPercent: 40,
-    duration: 2,
+    yPercent: 20,
+    duration: 2.2,
     yoyo: true,
     repeat: -1,
     paused: true,
     ease: "power1.inOut",
   });
   const wave2 = gsap.to(bottomImgs, {
-    yPercent: -40,
-    duration: 2,
+    yPercent: -20,
+    duration: 2.2,
     yoyo: true,
     repeat: -1,
     paused: true,
