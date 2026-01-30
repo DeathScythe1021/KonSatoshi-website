@@ -159,6 +159,29 @@
   background-position: 0 90%;
 }
 
+/* artwork-section */
+
+.card{
+  @apply relative p-20  border-20 border-default w-[1078px] h-[900px] ;
+}
+
+.card-text{
+  @apply bg-default p-6 absolute  w-[514px] absolute bottom-0 left-0;
+  @apply font-mincho font-normal text-[16px] leading-normal tracking-[0.05em];
+}
+
+.view-all{
+  @apply  bg-default absolute bottom-0 right-0 flex justify-center items-center p-6;
+}
+.view-all p{
+  @apply font-dela font-normal text-[56px] leading-[1.2] tracking-[0.05em] text-bg;
+  
+}
+
+.view-all img{
+  @apply w-[35px] h-[30.6px];
+}
+
 @layer base {
   html {
     @apply snap-y snap-proximity scroll-auto h-screen overflow-y-scroll;
